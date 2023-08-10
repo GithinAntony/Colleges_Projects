@@ -1,0 +1,55 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% load mathfilters %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+    <!-- Event Welcome Area End -->
+    <!-- Razo Event Area Start -->
+    <section class="razo-events-area section-padding-80">
+        <div class="container">
+                     <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Book Instruments</h4>
+                        </div>
+                    </div>
+            <div class="row">
+                {% if instruments|length > 0 %}
+                {% for i in instruments %}
+                <!-- Single Razo Event Area -->
+                <div class="col-12">
+                    <div class="single-razo-event-area d-flex flex-wrap align-items-center mb-50 wow fadeInUp"
+                         data-wow-delay="100ms">
+                        <!-- Thumbnail -->
+                        <div class="event-thumbnail">
+                            <img src="{{ i.image }}" alt="">
+                        </div>
+                        <!-- Event Content -->
+                        <div class="event-content d-flex align-items-center">
+                            <div class="event-text">
+                                <h5>{{ i.name }}</h5>
+                               {% if i.available|sub:used_items.quantity__sum > 0 %}
+                                <P><b>Available Pieces:</b> {{i.available|sub:used_items.quantity__sum}} </P>
+                                {% else %}
+                                <P><b>Available Pieces:</b> 0 </P>
+                                {% endif %}
+                            </div>
+                            <!-- Event Purchase Button -->
+                            <div class="event-purchase-button">
+                                <a href="/user-book-order-1/{{ i.id }}/instrument" class="btn razo-btn"><i
+                                        class="icon_cart"></i> Buy Rs.{{ i.amount }} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <b>No instruments added</b>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </section>
+
+{% include "includes/footer.html" %}

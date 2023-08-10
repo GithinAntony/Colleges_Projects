@@ -1,0 +1,44 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="" role="form" method="post" class="register-form" novalidate>
+                    {% csrf_token %}
+             <div class="col-xs-12 align-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+                    <h2>Enter your coupon code...</h2>
+                    <hr class="colorgraph">
+                    <div class="form-group">
+                    {{ form.coupon_code }}
+                    {{ form.coupon_code.errors }}
+                    </div>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="Apply Coupon" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

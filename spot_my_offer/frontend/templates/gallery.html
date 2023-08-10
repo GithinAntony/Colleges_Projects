@@ -1,0 +1,67 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+<style>
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 280px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 280px;
+  height: 200px;
+}
+
+div.desc {
+  padding: 0px;
+  text-align: center;
+}
+</style>
+
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 align-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+<div class="col-lg-12">
+<h2>Gallery</h2>
+
+	{% if gallery|length > 0 %}
+{% for i in gallery %}
+	<div class="gallery">
+  <a target="_blank" href="{{i.photos}}">
+    <img src="{{i.photos}}" alt="Cinque Terre" width="100" >
+  </a>
+  <div class="desc">{{ i.text }}</div>
+</div>
+{% endfor %}
+	{% else %}
+		<b>No images found</b>
+		{% endif %}
+
+
+ </div>
+ </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

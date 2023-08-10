@@ -1,0 +1,186 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" type="text/css">
+<style>
+  dl {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+}
+  </style>
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+          <div class="col-xs-12">
+          <a href="/shop-delete-coupons/{{ coupons.id }}" class="btn btn-danger btn-lg" onclick="return confirm('Are you sure you want to delete this item?');" >Delete</a>
+          <p>&nbsp;</p>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-6">
+                <form action="" enctype="multipart/form-data" class="register-form" method="POST"  novalidate id="myform">
+					               {% csrf_token %}
+                    <div class="col-xs-12 align-center">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li
+{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <h2>Update Your Coupon</h2>
+                    <hr class="colorgraph">
+
+                    <div class="form-group">
+                        <label for="offfer_photo">Coupon Title</label>
+                        <input type="text" name="coupon_title" autocomplete="off" class="form-control input-lg" placeholder="Coupon Title" maxlength="250" required="" value="{{ coupons.coupon_title }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offfer_photo">Coupon Status</label>
+                        <select class="form-control input-lg" name="coupon_status">
+                          <option value="">Select Status</option>
+                          <option value="active" {% if coupons.coupon_status == 'active' %} selected {% endif %}>Active</option>
+                          <option value="pending" {% if coupons.coupon_status == 'pending' %} selected {% endif %}>Pending</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offfer_photo">% of Discount eg: 15% </label>
+                        <input type="number" name="discount_percentage" autocomplete="off" class="form-control input-lg" placeholder="Percentage Discount" maxlength="10" value="{{ coupons.discount_percentage }}" >
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="submit" value="Update Coupon" class="btn btn-theme btn-block btn-lg">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-6">
+                <h2>Coupon Code Details</h2>
+                  <hr class="colorgraph">
+                  <dl>
+                  <dt>Generated No:</dt>
+                  <dd>{{ coupons.generated_items }}</dd>
+                  <dt>Append Text:</dt>
+                  <dd>{{ coupons.append_text }}</dd>
+                  <dt>Date Added:</dt>
+                  <dd>{{ coupons.created_at }}</dd>
+                 </dl>
+
+<hr class="colorgraph">
+<div class="col-xs-12">
+<button class="btn btn-info btn-md" id="export_csv">Export {{ coupons.generated_items }} codes to Csv</button>
+<p>&nbsp;</p>
+  </div>
+                 {% if coupon_codes %}
+                 <table class="table table-bordered table-hover table-sm">
+                     <tr>
+                         <th>#</th>
+                         <th>COUPON CODE</th>
+                         <th>STATUS</th>
+                         <th>LAST UPDATE</th>
+                     </tr>
+
+                     {% for i in coupon_codes %}
+                     <tr>
+                         <td>{{ forloop.counter }}</td>
+                         <td>{{ i.coupon_code }}</td>
+                         <td>{{ i.coupon_used_status }}</td>
+                         <td>{{ i.updated_at }}</td>
+                     </tr>
+                     {% endfor %}
+                   </table>
+                   {% else %}
+                   <div class="col-12">
+                       <p>No Coupon Codes Added</p>
+                   </div>
+                   {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+{% include "includes/footer.html" %}
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'validate/additional-methods.min.js' %}"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#validity').datetimepicker({
+			sideBySide :true,
+			format: 'DD-MM-YYYY hh:mm A',
+			minDate: moment().add(1, 'h'),
+			useCurrent : false
+		});
+
+    $( "#myform" ).validate({
+     ignore: [],
+      rules: {
+         coupon_title: {
+          required: true,
+          maxlength: 255
+        },
+        coupon_status: {
+          required: true,
+          maxlength: 255
+        },
+        no_of_coupon_code: {
+          required: true,
+          digits: true,
+          maxlength: 12,
+        },
+        discount_percentage: {
+          required: true,
+          digits: true,
+          min:1,
+          max:99,
+        },
+        append_text: {
+          required: true,
+          digits:false,
+          maxlength: 10
+        },
+        coupon_status: {
+          required: true,
+          maxlength: 255
+        },
+      }
+    });
+
+    $(function() {
+  $("#export_csv").on('click', function() {
+    var data = "";
+    var tableData = [];
+    var rows = $("table tr");
+    rows.each(function(index, row) {
+      var rowData = [];
+      $(row).find("th, td").each(function(index, column) {
+        rowData.push(column.innerText);
+      });
+      tableData.push(rowData.join(","));
+    });
+    data += tableData.join("\n");
+    $(document.body).append('<a id="download-link" download="data.csv" href=' + URL.createObjectURL(new Blob([data], {
+      type: "text/csv"
+    })) + '/>');
+    $('#download-link')[0].click();
+    $('#download-link').remove();
+  });
+
+});
+	});
+</script>

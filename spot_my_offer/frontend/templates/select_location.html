@@ -1,0 +1,44 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="" role="form" method="post" class="register-form" novalidate>
+                    {% csrf_token %}
+                    <h2>Select your location to continue...</h2>
+                    <hr class="colorgraph">
+                    {% if place %}
+                    <div class="form-group">
+                        <select class="form-control input-lg" name="location" tabindex="1" required>
+                            {% for i in place %}
+                            <option value="{{ i.name }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% else %}
+                    <div class="col-12">
+                        <p>No Places Added</p>
+                    </div>
+                    {% endif %}
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="Search Location" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

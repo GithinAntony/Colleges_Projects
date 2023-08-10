@@ -1,0 +1,47 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 col-xs-12 col-sm-8 col-md-6">
+                <form action="" role="form" method="post" class="register-form" novalidate>
+                    {% csrf_token %}
+                            <div class="row">
+            <div class="col-sm-10">
+                <h2>Select category in {{ request.session.location }}...</h2>
+            </div>
+            <div class="col-sm-2">
+                <a href="/user-offer" class="btn btn-danger btn-sm btn-block" style=" margin-top: 20px; font-weight: bold" >< BACK</a>
+            </div>
+            </div>
+
+
+                    <hr class="colorgraph">
+                    {% if category %}
+                    <div class="row">
+                          {% for i in category %}
+          <div class="col-lg-3 col-md-4">
+            <div class="icon-box">
+              <h3><a href="/user-offer-category-save/{{ i }}" class="category-link" >{{ i  }}</a></h3>
+            </div>
+          </div>
+             {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="col-12">
+                        <p>No category added</p>
+                    </div>
+                    {% endif %}
+                    <hr class="colorgraph">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

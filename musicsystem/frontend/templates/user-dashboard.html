@@ -1,0 +1,83 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<style>
+.statis {
+  color: #EEE;
+  margin-top: 15px;
+}
+.statis .box {
+  position: relative;
+  padding: 15px;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 25px;
+}
+.statis .box h3:after {
+  content: "";
+  height: 2px;
+  width: 70%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.12);
+  display: block;
+  margin-top: 10px;
+}
+.statis .box i {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  font-size: 22px;
+  padding: 15px;
+  top: -25px;
+  left: -25px;
+  background-color: rgba(255, 255, 255, 0.15);
+  line-height: 60px;
+  text-align: right;
+  border-radius: 50%;
+}
+.warning {background-color: #f0ad4e}
+.danger {background-color: #d9534f}
+.success {background-color: #5cb85c}
+.inf {background-color: #5bc0de}
+.lead { font-weight: bold; color: white }
+</style>
+<h1>User Dasboard</h1>
+<h3>Hi, {{ request.session.full_name  }}<span class="text-lowercase" >({{ request.session.usertype }})</h3>
+<section class='statis text-center'>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box bg-primary">
+              <i class="fa fa-eye"></i>
+              <h3>{{total_orders.count}}</h3>
+              <p class="lead">Total Orders</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box danger">
+              <i class="fa fa-user-o"></i>
+              <h3>{{events.count}}</h3>
+              <p class="lead">Events</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box warning">
+              <i class="fa fa-shopping-cart"></i>
+              <h3>{{instruments.count}}</h3>
+              <p class="lead">Instruments</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box success">
+              <i class="fa fa-handshake-o"></i>
+              <h3>{{total_users.count}}</h3>
+              <p class="lead">Customers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% include "includes/footer.html" %}

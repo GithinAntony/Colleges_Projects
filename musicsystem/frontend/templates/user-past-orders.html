@@ -1,0 +1,75 @@
+{% load static %}
+{% load mathfilters %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section class="blog-details-area section-padding-0-80">
+    <div class="container-fluid">
+        <!-- Post Details Text -->
+        <div class="post-details-text">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-9">
+
+                    <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Events</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-xs-12 align-center">
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li
+                                        {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-12">
+                            {% if orders|length > 0 %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Item Name</th>
+                                    <th scope="col">Item Type</th>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">Item Quantity</th>
+                                    <th scope="col">Item Price</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Paid By</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in orders %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ i.item_name }}</td>
+                                    <td>{{ i.item_type }}</td>
+                                    <td>{{ i.fullname }}</td>
+                                    <td>{{ i.quantity }}</td>
+                                    <td>Rs.{{ i.item_price }}</td>
+                                    <td>Rs.{{ i.quantity|mul:i.item_price }}</td>
+                                    <td>{{ i.paid_by }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <b>No orders added</b>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

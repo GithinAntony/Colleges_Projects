@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Music Store </title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static '/img/core-img/favicon.ico' %}">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div>
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+        <span>Wait, please...</span>
+    </div>
+</div>
+<!-- /Preloader -->
+<!-- Header Area Start -->
+<header class="header-area">
+    <!-- Main Header Start -->
+    <div class="main-header-area">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="razoNav">
+                    <!-- Logo -->
+                    <a class="nav-brand" href="index.html"><img src="{% static './img/core-img/logo.png' %}" alt=""></a>
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+
+                                {% if 'is_logged_in' not in request.session %}
+                                {% url 'home' as home_url %}
+                                <li><a href="/home" {% if request.get_full_path == home_url %} class="active" {% endif %} >Home</a></li>
+                                {% url 'gallery' as home_url %}
+                                <li><a href="/gallery" {% if request.get_full_path == home_url %} class="active" {% endif %} >Gallery</a></li>
+                                {% url 'about-us' as home_url %}
+                                <li><a href="/about-us" {% if request.get_full_path == home_url %} class="active" {% endif %} >About Us</a></li>
+                                {% endif %}
+                                {% if 'is_logged_in' not in request.session %}
+                                {% url 'login' as home_url %}
+                                {% url 'register' as home_url_2 %}
+                                <li><a href="#" {% if request.get_full_path == home_url or request.get_full_path == home_url_2  %} class="active" {% endif %} >Login</a>
+                                    <ul class="dropdown">
+                                        <li><a href="/login" {% if request.get_full_path == home_url %} class="active" {% endif %} >Login Here</a></li>
+                                        <li><a href="/register" {% if request.get_full_path == home_url_2 %} class="active" {% endif %} >Register Here</a></li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+
+                                {% if 'is_logged_in' in request.session %}
+                                {% if request.session.usertype == 'user' %}
+                                {% url 'user-dashboard' as home_url %}
+                                <li><a href="/user-dashboard" {% if request.get_full_path == home_url %} class="active" {% endif %} >Dashboard</a></li>
+                                {% endif %}
+                                {% if request.session.usertype == 'admin' %}
+                                {% url 'admin-dashboard' as home_url %}
+                                <li><a href="/admin-dashboard" {% if request.get_full_path == home_url %} class="active" {% endif %} >Dashboard</a></li>
+                                {% endif %}
+                                {% if request.session.usertype == 'user' %}
+                                {% url 'user-book-events' as home_url %}
+                                <li><a href="/user-book-events" {% if request.get_full_path == home_url %} class="active" {% endif %} >Book Events</a></li>
+                                {% url 'user-book-instruments' as home_url %}
+                                <li><a href="/user-book-instruments" {% if request.get_full_path == home_url %} class="active" {% endif %} >Buy Instruments</a></li>
+                                {% url 'user-past-orders' as home_url %}
+                                <li><a href="/user-past-orders" {% if request.get_full_path == home_url %} class="active" {% endif %} >Past Orders</a></li>
+                                {% url 'free-streaming' as home_url %}
+                                <li><a href="/free-streaming" {% if request.get_full_path == home_url %} class="active" {% endif %} >Free Streaming</a></li>
+                                {% endif %}
+                                {% if request.session.usertype == 'admin' %}
+                                {% url 'admin-registered-users' as home_url %}
+                                <li><a href="/admin-registered-users" {% if request.get_full_path == home_url %} class="active" {% endif %} >Users</a></li>
+                                {% url 'admin-events' as home_url %}
+                                <li><a href="/admin-events" {% if request.get_full_path == home_url %} class="active" {% endif %} >Events</a></li>
+                                {% url 'admin-instruments' as home_url %}
+                                <li><a href="/admin-instruments" {% if request.get_full_path == home_url %} class="active" {% endif %} >Instruments</a></li>
+                                {% url 'admin-cmessages' as home_url %}
+                                <li><a href="/admin-cmessages" {% if request.get_full_path == home_url %} class="active" {% endif %} >Contact Us Message</a></li>
+                                {% url 'admin-gallery' as home_url %}
+                                <li><a href="/admin-gallery" {% if request.get_full_path == home_url %} class="active" {% endif %} >Gallery</a></li>
+                                {% endif %}
+
+                                <li><a href="#" >Hi, {{ request.session.full_name }} <span class="text-lowercase" >({{ request.session.usertype }})</span> </a>
+                                    <ul class="dropdown">
+                                     <li><a href="/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+
+                                {% endif %}
+
+                                {% if 'is_logged_in' not in request.session %}
+                                {% url 'contact-us' as home_url %}
+                                <li><a href="/contact-us" {% if request.get_full_path == home_url %} class="active" {% endif %} >Contact Us</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Area End -->

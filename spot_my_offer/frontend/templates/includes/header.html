@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Spot My Offer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<!-- css -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/cubeportfolio.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" />
+	<!-- Theme skin -->
+	<link id="t-colors" href="{% static 'skins/default.css' %}" rel="stylesheet" />
+	<!-- boxed bg -->
+	<link id="bodybg" href="{% static 'bodybg/bg1.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrapper">
+		<!-- start header -->
+		<header>
+			<div class="navbar navbar-default navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+						<a class="navbar-brand" href="/home"><img src="{% static 'img/logo.png' %}" alt="" width="199" height="52" /></a>
+					</div>
+					<div class="navbar-collapse collapse ">
+						<ul class="nav navbar-nav">
+                        	<li><a href="/home">Home</a></li>
+							{% if 'is_logged_in' not in request.session %}
+                            <li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Users <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/user-login">User Login</a></li>
+									<li><a href="/user-register">User Registration</a></li>
+                                    <li><a href="/shop-login">Shop Login</a></li>
+									<li><a href="/shop-register">Shop Registration</a></li>
+								</ul>
+							</li>
+                            {% endif %}
+                            <!-- User -->
+                            {% if 'is_logged_in' in request.session and request.session.usertype == 'user' %}
+							<li><a href="/user-offer">Offers</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">My Profile <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/user-my-orders">My Orders</a></li>
+								</ul>
+							</li>
+                            {% endif %}
+                            <!-- User -->
+						 <!-- Shop -->
+                            {% if 'is_logged_in' in request.session and request.session.usertype == 'shop' %}
+							<li><a href="/shop-dashboard">Dashboard</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Offers <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/shop-my-offers">My Offers</a></li>
+                 <li><a href="/shop-add-offer">Add Offer</a></li>
+								</ul>
+							</li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Coupons <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/shop-my-coupons">My Coupons</a></li>
+								 <li><a href="/shop-add-coupons">Add Coupons</a></li>
+								</ul>
+							</li>
+                            {% endif %}
+                            <!-- Shop -->
+              <li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+							{% if 'is_logged_in' in request.session %}
+                            <li><a href="/logout">Logout</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- end header -->

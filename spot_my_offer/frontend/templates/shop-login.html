@@ -1,0 +1,58 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 align-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form acton="" class="form-horizontal" method="POST" novalidate>
+                    {% csrf_token %}
+                    <h2>Shop Login</h2>
+                    <hr class="colorgraph">
+
+                    <div class="form-group">
+                        <div class="col-sm-12 align-center">
+                            {{ form.non_field_errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password }}
+                        {{ form.password.errors }}
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="Sign in"
+                                                               class="btn btn-primary btn-block btn-lg" tabindex="3">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            If you are a user, <a href="/register">Register Here</a><br>
+                            If you are a Shop Owner, <a href="/shop-register">Register Here</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

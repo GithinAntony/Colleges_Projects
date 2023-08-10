@@ -1,0 +1,111 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7">
+                <article>
+                    <div class="post-image">
+                        <div class="post-heading">
+                            <h3><a href="#">{{ i.title }}</a></h3>
+                        </div>
+                        <img src="{{ i.photo }}" alt="" class="img-responsive" width="100%"/>
+                    </div>
+                    <span class="offer-subs">HIGHLIGHTS</span>
+                    <p>{{ i.highlights }}</p>
+                    <br><br>
+                    <span class="offer-subs">DESCRIPTION</span>
+                    <p>{{ i.description }}</p>
+                    <br><br>
+                    <span class="offer-subs">TERMS AND CONDITIONS</span>
+                    <p>{{ i.termsandconditions }}</p>
+                </article>
+
+
+                <div class="clear"></div>
+            </div>
+            <div class="col-lg-5" style="">
+                <aside class="right-sidebar"><br><br><br>
+                    <div class="widget">
+                        <table class="table table-bordered">
+                            <tr class="danger">
+                                <th>Original Price</th>
+                                <th>Offer Price</th>
+                            </tr>
+                            <tr>
+                                <td style="font-size:17px; text-decoration:line-through">
+                                    Rs {{ i.actual_price }}/-
+                                </td>
+                                <td style="font-size:17px;font-weight:bold">
+                                    Rs {{ i.offer_price }}/-
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <form action="" enctype="multipart/form-data" class="register-form" method="POST"  novalidate id="myform">
+        					               {% csrf_token %}
+                            <div class="col-xs-12 align-center">
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li
+                                            {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+
+                            <h4>Apply Coupon</h4>
+                            <hr class="colorgraph">
+
+                            <div class="form-group">
+                                <label for="offfer_photo">Enter Coupon Code Here if needed </label>
+                                <input type="text" name="coupon_code" autocomplete="off" class="form-control input-lg" placeholder="Coupon Code" maxlength="200">
+                            </div>
+
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <input type="submit" value="Buy this Offer" class="btn btn-theme btn-block btn-lg">
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% include "includes/footer.html" %}
+<style>
+.well{background:#4b7bbd; color:#FFFFFF}
+.well h3{margin:0px; color:#FFFFFF}
+.original{font-size:14px;font-weight:bold; padding:15px;}
+.offer{font-size:18px;font-weight:bold; padding:15px; background:#FFFFFF; color:#4b7bbd}
+</style>
+<script src="{% static 'validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'validate/additional-methods.min.js' %}"></script>
+<script>
+  	$(function () {
+  $( "#myform" ).validate({
+   ignore: [],
+    rules: {
+       coupon_code: {
+         required: false,
+        maxlength: 200
+      },
+    }
+  });
+});
+</script>

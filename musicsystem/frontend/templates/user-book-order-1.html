@@ -1,0 +1,155 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section class="blog-details-area section-padding-80">
+    <div class="container-fluid">
+        <!-- Post Details Text -->
+        <div class="post-details-text">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-9">
+                    <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">My Order</h4>
+                        </div>
+                    </div>
+                    <div class="col-6 offset-3">
+
+                        <div class="event-search-content">
+                            <form action="" class="search-form" method="POST" novalidate>
+                                {% csrf_token %}
+                                <div class="col-xs-12 align-center">
+                                    {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li
+                                                {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message
+                                            }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                                {% if item|length > 0 %}
+                                {% for i in item %}
+                                <!-- Single Razo Event Area -->
+                                <div class="col-12">
+                                    <div class="single-razo-event-area d-flex flex-wrap align-items-center mb-50 wow fadeInUp"
+                                         data-wow-delay="100ms">
+                                        <!-- Thumbnail -->
+                                        <div class="event-thumbnail">
+                                            <img src="{{ i.image }}" alt="">
+                                        </div>
+                                        <!-- Event Content -->
+                                        {% if item_type == 'event' %}
+                                        <div class="event-content d-flex align-items-center">
+                                            <div class="event-text">
+                                                <h4>{{ i.event }} ( {{ item_type }} )</h4>
+                                                <h5><b></b><span class="color-addition">Price:</span></b> Rs. {{ i.amount }}</h5>
+                                                <h5><b></b><span class="color-addition">Quantity:</span></b> {{ form.quantity }}</h5>
+                                                {{ form.name.errors }}
+                                                <h5><b></b><span class="color-addition">Total Amount To Pay:</span></b>
+                                                    Rs. <span id="i_tee_45">{{ i.amount }}</span></h5>
+                                            </div>
+                                            <!-- Event Purchase Button -->
+                                        </div>
+                                        {% endif %}
+                                        {% if item_type == 'instrument' %}
+                                        <div class="event-content d-flex align-items-center">
+                                            <div class="event-text">
+                                                <h4>{{ i.name }} ( {{ item_type }} )</h4>
+                                                <h5><b></b><span class="color-addition">Price:</span></b> Rs. {{ i.amount }}</h5>
+                                                <h5><b></b><span class="color-addition">Quantity:</span></b> {{ form.quantity }} </h5>
+                                                {{ form.name.errors }}
+                                                <h5><b></b><span class="color-addition">Total Amount To Pay:</span></b>
+                                                    Rs. <span id="i_total_quantity">{{ i.amount }}</span></h5>
+                                            </div>
+                                            <!-- Event Purchase Button -->
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <script>
+   function calculate_total(quantity) {
+   var z  = {{ i.amount }};
+   var item_type = '{{ item_type }}';
+   if(item_type == 'event') {
+   document.getElementById("i_tee_45").innerHTML = (z * quantity);
+   } else {
+    document.getElementById("i_total_quantity").innerHTML = (z * quantity);
+   }
+   }
+                                </script>
+                                {% endfor %}
+                                {% else %}
+                                <b>No items added</b>
+                                {% endif %}
+
+                                <div class="row align-items-end">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.name.id_for_label }}">Name</label>
+                                            {{ form.name }}
+                                            {{ form.name.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.address.id_for_label }}">Address</label>
+                                            {{ form.address }}
+                                            {{ form.address.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.payment_type.id_for_label }}">Payemnt Type</label>
+                                            {{ form.payment_type }}
+                                            {{ form.payment_type.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.name_on_card.id_for_label }}">Name on Card</label>
+                                            {{ form.name_on_card }}
+                                            {{ form.name_on_card.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.credit_card_number.id_for_label }}">Credit Card Number</label>
+                                            {{ form.credit_card_number }}
+                                            {{ form.credit_card_number.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.expiration.id_for_label }}">Expiration Date</label>
+                                            {{ form.expiration }}
+                                            {{ form.expiration.errors }}
+                                        </div>
+                                    </div>
+                                     <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="{{ form.cvv.id_for_label }}">CVV</label>
+                                            {{ form.cvv }}
+                                            {{ form.cvv.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group text-left">
+                                            <button type="submit" class="btn razo-btn w-40">Pay</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

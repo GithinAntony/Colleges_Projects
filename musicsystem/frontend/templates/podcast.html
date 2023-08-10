@@ -1,0 +1,85 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+
+    <!-- Event Welcome Area Start -->
+    
+
+    <!-- Event Welcome Area End -->
+    <!-- Razo Event Area Start -->
+    <section class="razo-events-area section-padding-80">
+        <div class="container">
+                                <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Free Streaming Music</h4>
+                        </div>
+                    </div>
+
+   <div class="row">
+                <div class="col-12">
+                    {% if podcast|length > 0 %}
+{% for i in podcast %}
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp"
+                         data-wow-delay="100ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>{{ forloop.counter }}.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/25.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls="true">
+                                    <source src="{{i.streaming_file}}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>{{i.text}}</h5>
+                                 <a href="{{i.streaming_file}}" download style="color: white"> Download Mp3</a>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+                    </div>
+  {% endfor %}
+                    {% else %}
+                    <b>No mp3 added</b>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Event Welcome Area End -->
+    <!-- Razo Event Area Start -->
+    <section class="razo-events-area section-padding-80">
+        <div class="container">
+                                <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Free Streaming Movie</h4>
+                        </div>
+                    </div>
+
+   <div class="row">
+                <div class="col-12">
+
+<video width="800" controls="true">
+  <source src="{% static 'video/moviemalayalam.mp4' %}" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% include "includes/footer.html" %}

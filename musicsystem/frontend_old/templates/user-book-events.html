@@ -1,0 +1,74 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+
+    <!-- Event Welcome Area Start -->
+    <section class="event-welcome-area bg-overlay bg-img jarallax" style="background-image: url({% static 'img/bg-img/54.jpg' %});">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+                    <div class="event-welcome-text text-center">
+                        <span>Event start on 19 March, 2020</span>
+                        <h2>Drop The Colors</h2>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                        <div class="coming-soon-clock mt-30 mb-30">
+                            <div id="clock"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Welcome Area End -->
+    <!-- Razo Event Area Start -->
+    <section class="razo-events-area section-padding-80">
+        <div class="container">
+                                <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Book Events</h4>
+                        </div>
+                    </div>
+            <div class="row">
+ {% if event|length > 0 %}
+                     {% for i in event %}
+                <!-- Single Razo Event Area -->
+                <div class="col-12">
+                    <div class="single-razo-event-area d-flex flex-wrap align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Thumbnail -->
+                        <div class="event-thumbnail">
+                            <img src="{{ i.image }}" alt="">
+                        </div>
+                        <!-- Event Content -->
+                        <div class="event-content d-flex align-items-center">
+                            <div class="event-text">
+                                <h5>{{ i.event }}</h5>
+                                <div class="event-meta">
+                                    <a href="#" class="event-date"><i class="icon_calendar"></i> {{ i.date }}</a>
+                                    <a href="#" class="event-time"><i class="icon_clock_alt"></i> {{ i.time }}</a>
+                                    <a href="#" class="event-address"><i class="icon_pin_alt"></i> {{ i.location }}</a>
+                                </div>
+                                <p>{{ i.more }}</p>
+                                <p>Person to contact: {{ i.contact }}</p>
+                            </div>
+                            <!-- Event Purchase Button -->
+                            <div class="event-purchase-button">
+                                <a href="/user-book-order-1/{{ i.id }}/event" class="btn razo-btn"><i class="icon_cart"></i> Buy Tickets Rs.{{ i.amount }} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   {% endfor %}
+              {% else %}
+                            <b>No events added</b>
+                            {% endif %}
+
+            </div>
+
+        </div>
+    </section>
+
+{% include "includes/footer.html" %}

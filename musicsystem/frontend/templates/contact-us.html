@@ -1,0 +1,59 @@
+{% load static %}
+{% include "includes/header.html" %}
+<section class="blog-details-area section-padding-80">
+    <div class="container">
+        <!-- Post Details Text -->
+        <div class="post-details-text">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-9">
+
+                    <div class="col-12">
+                        <div class="section-heading text-center">
+                            <h2>Contact Us</h2>
+                        </div>
+                    </div>
+                    <div class="razo-contact-form">
+                        <h2 class="mb-4">Drop Us A Message</h2>
+
+                        <!-- Form -->
+                        <form action="" method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="col-xs-12 align-center">
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li
+                                            {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="{{ form.name.id_for_label }}">Name</label>
+                                    {{ form.name }}
+                                    {{ form.name.errors }}
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="{{ form.email.id_for_label }}">Email</label>
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="col-12">
+                                    <label for="{{ form.message.id_for_label }}">Message</label>
+                                    {{ form.message }}
+                                    {{ form.message.errors }}
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn razo-btn btn-3 mt-15">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include "includes/footer.html" %}

@@ -1,0 +1,92 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="" role="form" method="post" class="register-form" novalidate>
+                    {% csrf_token %}
+                    <h2>Coupon Details</h2>
+
+                    <div class="row">
+                        {% if orders %}
+                        <div class="col-md-12">
+                            <hr class="colorgraph">
+
+                         <div class="col-xs-12 align-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+<div class="row">
+<div class="col-md-6"><label>OFFER PHOTO:</label></div>
+<div class="col-md-6">
+    <img src="{{ orders.offer.photo }}" alt="" class="img-responsive" width="120" style="float: left;" />
+    <img src="{{ '/media/barcode/'}}{{ orders.id }}{{'.png' }}" alt="" class="img-responsive" width="100" style="float: left;" />
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>OFFER TITLE:</label></div>
+<div class="col-md-6">{{ orders.offer.title }}</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>OFFER PRICE:</label></div>
+<div class="col-md-6">Rs.{{ orders.offer.offer_price }}</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>USER NAME:</label></div>
+<div class="col-md-6">{{ orders.user.name }}</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>USER EMAIL:</label></div>
+<div class="col-md-6">{{ orders.user.email }}</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>USER PHONE:</label></div>
+<div class="col-md-6">{{ orders.user.phone }}</div>
+</div>
+
+<div class="row">
+<div class="col-md-6"><label>USER ADDRESS:</label></div>
+<div class="col-md-6">{{ orders.user.address }}</div>
+</div>
+
+
+
+                            <hr class="colorgraph">
+                        </div>
+                        {% else %}
+                       <div class="col-md-12">
+                             Not valid coupon
+                        </div>
+                        {% endif %}
+                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="submit" value="Use this coupon" class="btn btn-primary btn-block btn-lg" style="float:left">
+                        </div>
+                        <div class="col-xs-12 col-md-6"> <a href="/shop-redeem-offer" class="btn btn-danger btn-block btn-lg pull-left" style="float:left" >Go back</a> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

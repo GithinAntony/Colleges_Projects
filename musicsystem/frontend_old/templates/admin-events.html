@@ -1,0 +1,80 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section class="blog-details-area section-padding-0-80">
+    <div class="container-fluid">
+        <!-- Post Details Text -->
+        <div class="post-details-text">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-9">
+
+                    <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Events</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-xs-12 align-center">
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li
+                                        {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-12 text-right"><a href="/admin-events-add" class="btn btn-success btn-sm">Add Events</a><br /><br /></div>
+                        <div class="col-xs-12">
+                            {% if event|length > 0 %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Img</th>
+                                    <th scope="col">Event</th>
+                                    <th scope="col">Details</th>
+                                    <th scope="col">Date & Time</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Avaliable Seats</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in event %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><img src="{{ i.image }}" width="150px" /></td>
+                                    <td>{{ i.event }}</td>
+                                    <td>{{ i.more }}</td>
+                                    <td>{{ i.date }} {{ i.time }}</td>
+                                    <td>{{ i.location }}</td>
+                                    <td>{{ i.contact }}</td>
+                                    <td>{{ i.amount }}</td>
+                                    <td>{{ i.seat }}</td>
+                                    <td><a href="/admin-events/delete/{{ i.id }}"
+                                           class="btn btn-danger btn-sm">Delete</a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <b>No events added</b>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "includes/footer.html" %}

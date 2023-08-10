@@ -1,0 +1,25 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+		<section id="content">
+			<div class="container">
+				<div class="row">
+                	<h2>About Us <small>Know us better</small></h2>
+
+					<hr class="colorgraph">
+   <div class="col-lg-12">
+Sailor is a stylish, responsive and easy to use business Bootstrap template. It comes with lot of features and designed for many kind websites such as corporate business, portfolio, product showcase, creative agencies, business consultant, website design, mobile development company etc.
+
+Sailor website template is built with the latest Bootstrap version. It works perfectly on any device and screen size.
+
+The Sailor template allows you to create a modern and stylish website, easily, so you can focus on what’s most important – your building projects and clients. It is designed for those who want to present a strong online presence and be on the top.
+   </div>
+                    <hr class="colorgraph">
+				</div>
+			</div>
+		</section>
+
+{% include "includes/footer.html" %}

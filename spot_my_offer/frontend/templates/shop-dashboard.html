@@ -1,0 +1,76 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+		<section id="content">
+		<div class="container">
+			<div class="row">
+				<h2 style="color:#A2080D">Welcome, {{ request.session.full_name }}</h2>
+				<h3>Summary</h3>
+				<hr class="colorgraph">
+				<!-- Repeat -->
+				<div class="col-xs-4 text-center">
+					<div class="well">
+						<h4 style="font-weight:300">TOTAL OFFERS ADDED</h4>
+						<h1 style="font-size:70px">{{ offer_details }}</h1>
+					</div>
+				</div>
+				<!-- Repeat -->
+				<!-- Repeat -->
+				<div class="col-xs-4 text-center">
+					<div class="well">
+						<h4 style="font-weight:300">TOTAL ORDERS</h4>
+						<h1 style="font-size:70px">{{ order_details }}</h1>
+					</div>
+				</div>
+				<!-- Repeat -->
+				<!-- Repeat -->
+				<div class="col-xs-4 text-center">
+					<div class="well">
+						<h4 style="font-weight:300">ACCOUNT BALANCE</h4>
+						<h1 style="font-size:70px">0</h1>
+					</div>
+				</div>
+				<!-- Repeat -->
+
+			</div>
+			<div class="row">
+				<!-- Repeat -->
+				<div class="col-xs-4 text-center col-xs-offset-4">
+					<div class="well">
+						<h4 style="font-weight:300">TOTAL REDEEMED ORDERS</h4>
+						<h1 style="font-size:70px">0</h1>
+					</div>
+				</div>
+				<!-- Repeat -->
+			</div>
+		</div>
+	</section>
+
+
+<style>
+.well {
+	background: #DCDCDC;
+	color: #2B2B2B
+}
+.well h3 {
+	margin: 0px;
+	color: #292929
+}
+.original {
+	font-size: 17px;
+	font-weight: bold;
+	padding: 15px;
+}
+.offer {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 15px;
+	background: #FFFFFF;
+	color: #212121
+}
+</style>
+
+{% include "includes/footer.html" %}

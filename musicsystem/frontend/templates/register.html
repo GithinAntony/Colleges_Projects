@@ -1,0 +1,96 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<div class="event-search-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="event-search-content">
+                    <form action="" class="search-form" method="POST" novalidate>
+                        {% csrf_token %}
+                        <div class="col-xs-12 align-center">
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li
+                                        {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="row align-items-end">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.name.id_for_label }}">Name</label>
+                                    {{ form.name }}
+                                    {{ form.name.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.email.id_for_label }}">Email</label>
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.username.id_for_label }}">Username</label>
+                                    {{ form.username }}
+                                    {{ form.username.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.password.id_for_label }}">Password</label>
+                                    {{ form.password }}
+                                    {{ form.password.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.conpassword.id_for_label }}">Confirm Password</label>
+                                    {{ form.conpassword }}
+                                    {{ form.conpassword.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                                    {{ form.phone }}
+                                    {{ form.phone.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="{{ form.address.id_for_label }}">Address</label>
+                                    {{ form.address }}
+                                    {{ form.address.errors }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group text-left">
+                                    <button type="submit" class="btn razo-btn w-40">Register</button>
+                                    <a href="/login" class="btn read-more-btn color-addition">Already registered, Log
+                                        in here <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

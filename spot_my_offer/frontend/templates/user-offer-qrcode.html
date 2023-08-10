@@ -1,0 +1,29 @@
+{% load static %}
+{% load qr_code %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-8 col-xs-12 col-md-offset-0 col-sm-offset-2 " align="center">
+                <h4>Your payment was succesfull. Your coupon code is <b style="color: #CC2E25">{{ order.couponcode }}</b>. Keep your code safe, And show it to the reception staff.</h4>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-2 ">
+<img src="/{{ filename }}" width="100%" >
+            </div>
+        </div>
+
+                <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-8 col-xs-12 col-md-offset-0 col-sm-offset-2 " align="center" >
+                <h4>Your coupon code is encoded to above qrcode.</h4>
+        </div>
+        </div>
+
+    </div>
+</section>
+{% include "includes/footer.html" %}

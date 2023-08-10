@@ -1,0 +1,72 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+		<section id="content">
+			<div class="container">
+				<div class="row">
+                	<h2>Contact us <small>get in touch with us by filling form below</small></h2>
+					<hr class="colorgraph">
+                	<div class="col-md-4"><br><br>
+                    <strong>Spot My Offer</strong><br>
+                    Sailor suite room V124, DB 91<br>
+                    Someplace 71745 Earth<br><br>
+                    (123) 456-7890 - (123) 555-7891
+                    email@domainname.com
+                    </div>
+					<div class="col-md-8">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25727.47787639908!2d76.58400712149297!3d9.379526896339364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4ff0992fab044337!2sPick+Best!5e0!3m2!1sen!2sin!4v1513756698788" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+    				</div>
+                    <hr class="colorgraph">
+				</div>
+
+				<div class="row">
+
+
+
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form acton="" class="form-horizontal" method="POST" novalidate>
+                    {% csrf_token %}
+                    <h2>Send us a message</h2>
+                    <hr class="colorgraph">
+
+       <div class="col-xs-12 align-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+                    <div class="form-group">
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+					    <div class="form-group">
+                        {{ form.message }}
+                        {{ form.message.errors }}
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="submit" value="Sign in" class="btn btn-primary btn-block btn-lg" tabindex="3">
+                        </div>
+                    </div>
+                </form>
+            </div>
+					</div>
+
+			</div>
+		</section>
+
+{% include "includes/footer.html" %}

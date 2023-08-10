@@ -1,0 +1,66 @@
+{% load static %}
+{% include "includes/admin_header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<div class="row">
+    <div class="col-12 align-center">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li
+                    {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="col-12">
+        <h1>All Users</h1>
+        {% if record_details %}
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for i in record_details %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.username }}</td>
+                <td>{{ i.address }}</td>
+                <td>
+                    {% if i.status == 'active' %}
+                    <span class="badge badge-pill badge-success">Active</span>
+                    {% else %}
+                    <span class="badge badge-pill badge-warning">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if i.status == 'active' %}
+                    <a href="/admin-record-status/{{ i.id }}/users/pending" role="button" type="submit" class="btn btn-info btn-xs"><i class="fa fa-times"></i>
+                        Block</a>
+                    {% else %}
+                    <a href="/admin-record-status/{{ i.id }}/users/active" role="button" class="btn btn-info btn-xs"><i class="fa fa-check"></i> Unblock</a>
+                    {% endif %}
+                    <a href="/admin-record-delete/{{ i.id }}/users" role="button" class="btn btn-danger btn-xs"><i class="fa fa-check"></i> Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="col-12">
+            <p>No users Added</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% include "includes/admin_footer.html" %}

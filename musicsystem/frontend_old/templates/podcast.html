@@ -1,0 +1,159 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+
+
+    <!-- Event Welcome Area Start -->
+    <section class="event-welcome-area bg-overlay bg-img jarallax" style="background-image: url({% static 'img/bg-img/54.jpg' %});">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+                    <div class="event-welcome-text text-center">
+                        <span>Event start on 19 March, 2020</span>
+                        <h2>Drop The Colors</h2>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                        <div class="coming-soon-clock mt-30 mb-30">
+                            <div id="clock"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Welcome Area End -->
+    <!-- Razo Event Area Start -->
+    <section class="razo-events-area section-padding-80">
+        <div class="container">
+                                <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h4 class="widget-title">Free Streaming Music</h4>
+                        </div>
+                    </div>
+
+   <div class="row">
+                <div class="col-12">
+
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>1.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/25.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls>
+                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>Way Back Home - <span>RadioDaily Show</span></h5>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+
+                    </div>
+
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>2.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/26.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls>
+                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>Goodbye &amp; Good Riddance - <span>Juice World</span></h5>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+                    </div>
+
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="500ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>3.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/27.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls>
+                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>The Greatest Showman - <span>Soundtrack</span></h5>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+
+                    </div>
+
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="700ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>4.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/28.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls>
+                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>Mamma Mia! Here We Go Again - <span>Soundtrack</span></h5>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+
+                    </div>
+
+                    <!-- Single Music Chart -->
+                    <div class="single-music-chart d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="900ms">
+                        <!-- Music Content -->
+                        <div class="music-content d-flex align-items-center">
+                            <div class="sl-number">
+                                <h5>5.</h5>
+                            </div>
+                            <div class="music-thumb">
+                                <img src="{% static 'img/bg-img/29.jpg' %}" alt="">
+                            </div>
+                            <div class="audio-player">
+                                <audio preload="auto" controls>
+                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                </audio>
+                            </div>
+                            <div class="music-title">
+                                <h5>Pray For The Wicked - <span>Panic! At The Disco</span></h5>
+                            </div>
+                        </div>
+                        <!-- Music Price -->
+       
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% include "includes/footer.html" %}

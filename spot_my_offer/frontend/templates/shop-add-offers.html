@@ -1,0 +1,110 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" type="text/css">
+
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="" enctype="multipart/form-data" class="register-form" method="POST"  novalidate>
+					{% csrf_token %}
+                    <div class="col-xs-12 align-center">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li
+                                    {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <h2>Add New Offer</h2>
+                    <hr class="colorgraph">
+
+                    <div class="form-group">
+                        <label for="offfer_photo">OFFER PHOTO</label>
+                        {{ form.offer_photo }}
+                        {{ form.offer_photo.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.title }}
+                        {{ form.title.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.highlights }}
+                        {{ form.highlights.errors }}
+                    </div>
+
+                    <div class="form-group">
+
+                        {{ form.description }}
+                        {{ form.description.errors }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.actual_price }}
+                                {{ form.actual_price.errors }}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.offer_price }}
+                                {{ form.offer_price.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.validity }}
+                        {{ form.validity.errors }}
+                    </div>
+
+                    <div class="form-group">
+
+                        {{ form.termsandconditions }}
+                        {{ form.termsandconditions.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="place">Select a Place</label>
+
+                        {{ form.place }}
+                        {{ form.place.errors }}
+                    </div>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="submit" value="Add Offer" class="btn btn-theme btn-block btn-lg" tabindex="10">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% include "includes/footer.html" %}
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#validity').datetimepicker({
+			sideBySide :true,
+			format: 'DD-MM-YYYY hh:mm A',
+			minDate: moment().add(1, 'h'),
+			useCurrent : false
+		});
+	});
+
+
+
+</script>

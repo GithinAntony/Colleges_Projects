@@ -1,0 +1,81 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% if 'logged_in' in request.session %}
+**** redirect here
+{% endif %}
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="" role="form" class="register-form" method="post" novalidate >
+                    {% csrf_token %}
+                   {% if offer.offer_price != discounted_amount %}
+                    <h2>Payment of Rs.{{ discounted_amount }} <span style="text-decoration: line-through; color: orange">Rs.{{ offer.offer_price }}</span> </h2>
+                    {% else %}
+                    <h2>Payment of Rs.{{ offer.offer_price }} </h2>
+                    {% endif %}
+                    <hr class="colorgraph">
+                    {% if discount_details != '' %}
+                    <h4>Discount Details</h4>
+                    <b>APPLIED COUPON:</b> <span style="color: orange; font-weight: bold">{{ discount_details.coupon.coupon_title }}</span><br />
+                    <b>DISCOUNTED PERCENTAGE:</b> <span style="color: orange; font-weight: bold">{{ discount_details.coupon.discount_percentage }}%</span><br />
+                    <b>PAYMENT AFTER APPLYING COUPON:</b> <span style="color: orange; font-weight: bold">Rs. {{ discounted_amount }}</span>
+                    <hr class="colorgraph">
+                    {% endif %}
+                    <div class="form-group"> We accept : <img src="{% static 'img/payment.jpg' %}" width="200"></div>
+                    <div class="form-group">
+                        <label>Offer Title</label>
+                        <input type="text" class="form-control input-lg" disabled value="{{ offer.title }}">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.name }}
+                                {{ form.name.errors }}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.card }}
+                                {{ form.card.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.expdate }}
+                                {{ form.expdate.errors }}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                {{ form.expyear }}
+                                {{ form.expyear.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.cvv }}
+                        {{ form.cvv.errors }}
+                        <br>
+                        <img src="{% static 'img/cvv.jpg' %}" width="200"></div>
+                    <div class="form-group">
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                    </div>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="submit" value="Make Payment" class="btn btn-theme btn-block btn-lg"
+                                   tabindex="8">
+                        </div>
+                        <div class="col-xs-12 col-md-6"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% include "includes/footer.html" %}
